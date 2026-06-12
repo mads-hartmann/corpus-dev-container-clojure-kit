@@ -1,0 +1,12 @@
+{:paths ["src/clj" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.4"}
+        ch.qos.logback/logback-classic {:mvn/version "1.5.32"}
+        io.github.kit-clj/kit-core {:mvn/version "1.0.10"}
+        io.github.kit-clj/kit-undertow {:mvn/version "1.0.14"}
+        metosin/muuntaja {:mvn/version "0.6.11"}
+        metosin/reitit {:mvn/version "0.10.1"}
+        metosin/ring-http-response {:mvn/version "0.9.5"}
+        org.clojure/tools.logging {:mvn/version "1.3.0"}
+        ring/ring-core {:mvn/version "1.15.4"}
+        ring/ring-defaults {:mvn/version "0.7.0"}}
+ :aliases {:run {:main-opts ["-m" "corpus-dev-container-clojure-kit.core"]}}}
