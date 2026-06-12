@@ -1,0 +1,28 @@
+tasks:
+  installDeps:
+    name: Install dependencies
+    description: Download the Clojure dependencies declared in deps.edn.
+    command: |
+      clojure -P
+      clojure -P -M:run
+    triggeredBy:
+      - manual
+      - postDevcontainerStart
+      - prebuild
+
+services:
+  web-server:
+    name: Kit Web Server
+    description: Run the Kit/Undertow web server on port 3000.
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+    commands:
+      start: |
+        ona environment port open 3000 --dont-wait --admission creator_only --name "Kit Web Server"
+        clojure -M:run
+      ready: |
+        until curl -sf http://localhost:3000/healthz > /dev/null; do
+          echo "Waiting for web server on port 3000..."
+          sleep 1
+        done

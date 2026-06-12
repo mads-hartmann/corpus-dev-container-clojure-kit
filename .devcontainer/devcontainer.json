@@ -1,0 +1,17 @@
+{
+	"name": "Clojure Kit Corpus App",
+	"build": {
+		"context": ".",
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/java": {}
+	},
+	"forwardPorts": [3000],
+	"portsAttributes": {
+		"3000": {
+			"label": "Kit Web Server",
+			"onAutoForward": "notify"
+		}
+	}
+}
