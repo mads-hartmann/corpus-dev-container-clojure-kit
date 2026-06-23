@@ -1,0 +1,30 @@
+tasks:
+  installDeps:
+    name: Install dependencies
+    description: Install the Clojure CLI and download project dependencies.
+    command: |
+      if ! command -v clojure >/dev/null 2>&1; then
+        curl -fsSL -o /tmp/linux-install.sh https://download.clojure.org/install/linux-install.sh
+        chmod +x /tmp/linux-install.sh
+        sudo /tmp/linux-install.sh
+      fi
+      clojure -P
+      clojure -P -M:run
+    triggeredBy:
+      - manual
+      - postDevcontainerStart
+      - prebuild
+
+services:
+  kit-server:
+    name: Kit Server
+    description: Run the Kit/Undertow web server.
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+    commands:
+      start: |
+        ona environment port open 3000 --dont-wait --admission creator_only --name "Kit Server"
+        clojure -M:run
+      ready: |
+        curl -sf http://localhost:3000/healthz
