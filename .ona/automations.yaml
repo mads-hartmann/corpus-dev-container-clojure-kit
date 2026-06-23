@@ -1,13 +1,8 @@
 tasks:
   installDeps:
     name: Install dependencies
-    description: Install the Clojure CLI and download project dependencies.
+    description: Download the project's Clojure dependencies.
     command: |
-      if ! command -v clojure >/dev/null 2>&1; then
-        curl -fsSL -o /tmp/linux-install.sh https://download.clojure.org/install/linux-install.sh
-        chmod +x /tmp/linux-install.sh
-        sudo /tmp/linux-install.sh
-      fi
       clojure -P
       clojure -P -M:run
     triggeredBy:

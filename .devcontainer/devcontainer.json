@@ -1,6 +1,8 @@
 {
 	"name": "Clojure Kit Corpus App",
-	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
 	"features": {
 		"ghcr.io/devcontainers/features/java": {
 			"version": "21",
