@@ -1,7 +1,9 @@
 (ns corpus-dev-container-clojure-kit.web.handler
   (:require
    [integrant.core :as ig]
+   [muuntaja.core :as m]
    [reitit.ring :as ring]
+   [reitit.ring.middleware.muuntaja :as muuntaja]
    [ring.middleware.defaults :as defaults]
    [ring.middleware.session.cookie :as cookie]
    [ring.util.response :as response]))
@@ -35,4 +37,8 @@
 
 (defmethod ig/init-key :router/core
   [_ {:keys [routes] :as opts}]
-  (constantly (ring/router ["" opts routes])))
+  (constantly
+   (ring/router
+    ["" opts routes]
+    {:data {:muuntaja m/instance
+            :middleware [muuntaja/format-middleware]}})))
